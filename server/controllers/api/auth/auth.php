@@ -1,6 +1,6 @@
 <?php
 
-class auth extends db
+class auth
 {
     protected $token;
     private $required;
@@ -27,7 +27,7 @@ class auth extends db
         }
         //Query statement prepared
         $sql = sprintf("SELECT `email`,`username`,`password`,`token`,`status`, (SELECT `name` FROM `user_types` WHERE `id`=`users`.`user_types_id`) AS `right` FROM `users` WHERE `token` = '%s'", $this->token);
-        $check_key = $this->DbQuery($sql);
+        $check_key = db::DbQuery($sql);
 
         // check result set if it returns query error
         if (array_key_exists('error', $check_key)) {

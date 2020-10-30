@@ -30,18 +30,6 @@ function logFile($file)
     error_log($file.PHP_EOL, 3, __DIR__.'/logs/'.$date.'_log.txt');
 }
 
- function getPostData()
- {
-     return (object) [
-        'json' => @json_decode(file_get_contents('php://input')),
-         'post' => @(object) $_POST,
-       ];
- }
- function getQueryString($name = null)
- {
-     return $name ? @$_GET[$name] : $_GET;
- }
-
 try {
     include_once __DIR__.'/server/helpers/db.php';
     include_once __DIR__.'/server/ServerController.php';

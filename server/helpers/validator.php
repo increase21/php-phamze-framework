@@ -137,7 +137,7 @@ class validator
             return false;
         }
 
-        return property_exists($Obj, $field) && is_string($Obj->$field) ? db::$conn->real_escape_string(trim($Obj->$field)) : '';
+        return property_exists($Obj, $field) && is_string($Obj->$field) ? db::DbEscapeString($Obj->$field) : '';
     }
 
     public static function GetInputValueArray($Obj, $field)

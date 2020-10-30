@@ -195,4 +195,17 @@ class ServerController
             return $this->redirect(base_url().'/login');
         }
     }
+
+    public function getPostData()
+    {
+        return (object) [
+        'json' => @json_decode(file_get_contents('php://input')),
+         'post' => @(object) $_POST,
+       ];
+    }
+
+    public function getQueryString($name = null)
+    {
+        return $name ? @$_GET[$name] : $_GET;
+    }
 }
