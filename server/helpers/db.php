@@ -5,18 +5,21 @@ class db
     private static $host;
     private static $user;
     private static $pass;
+    private static $port;
+    private static $defaultPort = 3306;
     private static $db_name;
-    public static $conn;
     private static $ex;
+    public static $conn;
 
     // function to establis a database connection
-    public static function DbCreateConnection($hostname = null, $username = null, $password = null, $database = null)
+    public static function DbCreateConnection()
     {
-        self::$host = is_null($hostname) ? DB_HOST : $hostname;
-        self::$user = is_null($username) ? DB_USER : $username;
-        self::$pass = is_null($password) ? DB_PASS : $password;
-        self::$db_name = is_null($database) ? DB_NAME : $database;
-        self::$conn = new mysqli(self::$host, self::$user, self::$pass, self::$db_name);
+        self::$host = DB_HOST;
+        self::$user = DB_USER;
+        self::$pass = DB_PASS;
+        self::$db_name = DB_NAME;
+        self::$port = DB_PORT ?: self::$defaultPort;
+        self::$conn = new mysqli(self::$host, self::$user, self::$pass, self::$db_name, self::$port);
         // check if there is an error in the connection
         if (mysqli_connect_errno()) {
             exit(mysqli_connect_error());

@@ -196,16 +196,32 @@ class ServerController
         }
     }
 
-    public function getPostData()
+    public function getPostData($type = 'post | json | query')
     {
-        return (object) [
-        'json' => @json_decode(file_get_contents('php://input')),
-         'post' => @(object) $_POST,
-       ];
+        if ($type && !in_array($type, ['post', 'json', 'query'])) {
+            throw new Exception('Invalid post type. Expecting either post, json or query but got '.$type);
+        }
+
+        if ($type === 'post') { // if post return post
+            return @(object) $_POST;
+        } elseif ($type === 'json') { //if json return json
+            return @json_decode(file_get_contents('php://input'));
+        } elseif ($type === 'query') { //if query string, retun qiery string
+            return @(object) $_GET;
+        } else {
+            //if nothing comes, try getting which data is available and send
+            if (count(@$_GET) > 0) {
+                return @(object) $_GET;
+            } elseif (count(@$_POST)) {
+                return @(object) $_POST;
+            } else {
+                return @json_decode(file_get_contents('php://input'));
+            }
+        }
     }
 
-    public function getQueryString($name = null)
-    {
-        return $name ? @$_GET[$name] : $_GET;
-    }
+    //  public function getQueryString($name = null)
+   //  {
+   //      return $name ? @$_GET[$name] : $_GET;
+   //  }
 }

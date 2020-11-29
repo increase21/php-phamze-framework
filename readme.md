@@ -111,7 +111,7 @@ class user extends ServerController
 
     public function index()
     {
-        $jsonPost = $this->postData()->json;
+        $jsonPost = $this->postData()
         $email = @$jsonPost->email;
         $passowrd = @$jsonPost->password;
 
@@ -125,8 +125,18 @@ class user extends ServerController
 https://localhost/foldername/api/user or https://domain.com/api/user
 The abouve URLs will call the user class and the user class will execute the index function. $this->postData()->json returns all the json post data. helpers, validator and db are loaded as static class functions to the applications. can be use anywhere.
 
+# Available Methods
+
+| Method  | How it works | param |
+| ------------- | ------------- |-----------|
+| $this->loadModel  | For loading in database file stores in model folder  | file name (required)
+| $this->loadView  | For loading in view/frontend file stores in view folder. This method loads in header and footer  | file name (required)
+| $this->renderView  | For loading in view/frontend file stores in view folder. This method does not load in header and footer  | file name (required)
+| $this->redirect | For redirecting http request| url (required) |
+| $this->getPostData | For getting post request payload and query string | payload type (optional/required) |
+
 # NOTE 
-More details description coming soon
+More description...
 
 
 ## Contributing

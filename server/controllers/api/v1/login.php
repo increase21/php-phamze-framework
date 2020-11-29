@@ -9,6 +9,7 @@ class login extends ServerController
         // if auth is required, run auth here
         $Auth = new auth(true);
         $this->userData = $Auth->CheckToken();
+      //   var_dump($Auth);
     }
 
     public function index()
@@ -18,7 +19,7 @@ class login extends ServerController
         //if the post data is form data, use this
         $body = $this->getPostData()->post;
         //if a GET request and you want the query string, use
-        //   $page = getQueryString('optional here');
+        $page = getQueryString('optional here');
         $email = @$body->email;
         $password = @$body->password;
 
