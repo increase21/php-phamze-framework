@@ -111,7 +111,7 @@ class user extends ServerController
 
     public function index()
     {
-        $jsonPost = $this->postData()
+        $jsonPost = $this->getPostData()
         $email = @$jsonPost->email;
         $passowrd = @$jsonPost->password;
 

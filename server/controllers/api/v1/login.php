@@ -9,15 +9,15 @@ class login extends ServerController
         // if auth is required, run auth here
         $Auth = new auth(true);
         $this->userData = $Auth->CheckToken();
-      //   var_dump($Auth);
+        //   var_dump($Auth);
     }
 
     public function index()
     {
         //if the post data is JSON, use this
-        $body = $this->getPostData()->json;
+        $body = $this->getPostData('json');
         //if the post data is form data, use this
-        $body = $this->getPostData()->post;
+        $body = $this->getPostData('post');
         //if a GET request and you want the query string, use
         $page = getQueryString('optional here');
         $email = @$body->email;
