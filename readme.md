@@ -134,7 +134,7 @@ The abouve URLs will call the user class and the user class will execute the ind
 | $this->renderView  | For loading in view/frontend file stores in view folder. This method does not load in header and footer  | file name (required)
 | $this->redirect | For redirecting http request| url (required) |
 | $this->getPostData | For getting post request payload and query string | payload type (optional/required) |
-
+| $this->logFile | For logging data to log folder | data to log (required)
 # NOTE 
 More description...
 
